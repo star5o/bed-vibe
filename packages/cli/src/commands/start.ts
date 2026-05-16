@@ -1,8 +1,18 @@
 import { spawn } from 'node:child_process'
+import { resolve, dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { dirname, join } from 'node:path'
+import { existsSync } from 'node:fs'
 import chalk from 'chalk'
 import { isDaemonRunning } from '../daemon/pid.js'
+
+function findPackageRoot(): string {
+  let dir = dirname(fileURLToPath(import.meta.url))
+  for (let i = 0; i < 5; i++) {
+    if (existsSync(join(dir, 'package.json'))) return dir
+    dir = dirname(dir)
+  }
+  return dirname(fileURLToPath(import.meta.url))
+}
 
 export async function startCommand(): Promise<void> {
   const existing = isDaemonRunning()
@@ -11,9 +21,13 @@ export async function startCommand(): Promise<void> {
     return
   }
 
-  const __filename = fileURLToPath(import.meta.url)
-  const __dirname = dirname(__filename)
-  const daemonScript = join(__dirname, '..', 'daemon', 'index.js')
+  const pkgRoot = findPackageRoot()
+  const daemonScript = resolve(pkgRoot, 'dist', 'index.js')
+
+  if (!existsSync(daemonScript)) {
+    console.error(chalk.red(`Daemon script not found: ${daemonScript}`))
+    process.exit(1)
+  }
 
   const child = spawn(process.execPath, [daemonScript], {
     detached: true,
