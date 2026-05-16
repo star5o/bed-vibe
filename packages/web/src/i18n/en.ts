@@ -15,9 +15,14 @@ const en = {
   'auth.register': 'Register',
   'auth.username': 'Username',
   'auth.password': 'Password',
+  'auth.currentPassword': 'Current password',
+  'auth.newPassword': 'New password (6+ chars)',
+  'auth.changePassword': 'Change Password',
+  'auth.passwordChanged': 'Password changed',
   'auth.displayName': 'Display Name',
   'auth.logout': 'Logout',
   'auth.loginFailed': 'Login failed',
+  'auth.tooManyAttempts': 'Too many attempts, try again later',
 
   // Setup
   'setup.title': 'Initial Setup',

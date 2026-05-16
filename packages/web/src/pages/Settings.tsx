@@ -115,13 +115,13 @@ export default function Settings() {
 
         {/* Change password */}
         <section className="space-y-3">
-          <h2 className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wide">{t('auth.password')}</h2>
+          <h2 className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wide">{t('auth.changePassword')}</h2>
           <form onSubmit={changePassword} className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border)] space-y-3">
             <input
               type="password"
               value={currentPassword}
               onChange={e => setCurrentPassword(e.target.value)}
-              placeholder={t('auth.password')}
+              placeholder={t('auth.currentPassword')}
               autoComplete="current-password"
               className="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent)]"
             />
@@ -129,7 +129,7 @@ export default function Settings() {
               type="password"
               value={newPassword}
               onChange={e => setNewPassword(e.target.value)}
-              placeholder={t('auth.password')}
+              placeholder={t('auth.newPassword')}
               autoComplete="new-password"
               className="w-full px-4 py-2.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent)]"
             />

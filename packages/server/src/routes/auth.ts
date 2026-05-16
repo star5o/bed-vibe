@@ -8,6 +8,28 @@ import {
   isRegistrationEnabled,
 } from '../auth'
 
+// Rate limiter: max 5 attempts per IP per minute
+const loginAttempts = new Map<string, { count: number; resetAt: number }>()
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const entry = loginAttempts.get(ip)
+  if (!entry || now > entry.resetAt) {
+    loginAttempts.set(ip, { count: 1, resetAt: now + 60_000 })
+    return false
+  }
+  entry.count++
+  return entry.count > 5
+}
+
+// Cleanup stale entries every 5 minutes
+setInterval(() => {
+  const now = Date.now()
+  for (const [ip, entry] of loginAttempts) {
+    if (now > entry.resetAt) loginAttempts.delete(ip)
+  }
+}, 5 * 60_000)
+
 const auth = new Hono()
 
 auth.get('/status', (c) => {
@@ -18,6 +40,11 @@ auth.get('/status', (c) => {
 })
 
 auth.post('/register', async (c) => {
+  const ip = c.req.header('x-forwarded-for') || c.req.header('x-real-ip') || 'unknown'
+  if (isRateLimited(ip)) {
+    return c.json({ error: 'too many attempts, try again later' }, 429)
+  }
+
   const isSetup = needsSetup()
   if (!isSetup && !isRegistrationEnabled()) {
     return c.json({ error: 'registration disabled' }, 403)
@@ -59,6 +86,11 @@ auth.post('/register', async (c) => {
 })
 
 auth.post('/login', async (c) => {
+  const ip = c.req.header('x-forwarded-for') || c.req.header('x-real-ip') || 'unknown'
+  if (isRateLimited(ip)) {
+    return c.json({ error: 'too many attempts, try again later' }, 429)
+  }
+
   const { username, password } = await c.req.json<{
     username: string
     password: string

@@ -15,9 +15,14 @@ const zh = {
   'auth.register': '注册',
   'auth.username': '用户名',
   'auth.password': '密码',
+  'auth.currentPassword': '当前密码',
+  'auth.newPassword': '新密码（至少6位）',
+  'auth.changePassword': '修改密码',
+  'auth.passwordChanged': '密码已修改',
   'auth.displayName': '显示名称',
   'auth.logout': '退出登录',
   'auth.loginFailed': '登录失败',
+  'auth.tooManyAttempts': '尝试次数过多，请稍后再试',
 
   // Setup
   'setup.title': '初始化设置',
