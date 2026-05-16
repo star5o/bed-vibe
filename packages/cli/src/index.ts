@@ -31,6 +31,14 @@ async function main() {
       const { configCommand } = await import('./commands/config.js')
       return configCommand(args.slice(1))
 
+    case 'install':
+      const { installCommand } = await import('./commands/install.js')
+      return installCommand()
+
+    case 'uninstall':
+      const { uninstallCommand } = await import('./commands/install.js')
+      return uninstallCommand()
+
     case '--help':
     case '-h':
     case 'help':
@@ -57,9 +65,11 @@ ${chalk.bold('Usage:')}
   bv stop               Stop the daemon
   bv status             Show daemon status and connection info
   bv config             Configure server connection manually
+  bv install            Register as login service (auto-start on boot)
+  bv uninstall          Remove login service
 
 ${chalk.bold('Quick Start:')}
-  bv init http://your-server:31001
+  bv init http://your-server:3000
   bv start
 
 ${chalk.bold('How it works:')}
