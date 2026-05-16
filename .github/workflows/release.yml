@@ -69,10 +69,8 @@ jobs:
       - name: Set version
         run: |
           VERSION=${{ needs.resolve-version.outputs.version }}
-          cd packages/cli
-          npm version $VERSION --no-git-tag-version
-          cd ../shared
-          npm version $VERSION --no-git-tag-version
+          node -e "const f='packages/shared/package.json';const p=JSON.parse(require('fs').readFileSync(f));p.version='$VERSION';require('fs').writeFileSync(f,JSON.stringify(p,null,2)+'\n')"
+          node -e "const f='packages/cli/package.json';const p=JSON.parse(require('fs').readFileSync(f));p.version='$VERSION';p.dependencies['@bed-vibe/shared']='$VERSION';require('fs').writeFileSync(f,JSON.stringify(p,null,2)+'\n')"
 
       - name: Publish shared
         run: |
@@ -83,9 +81,7 @@ jobs:
 
       - name: Publish CLI
         run: |
-          VERSION=${{ needs.resolve-version.outputs.version }}
           cd packages/cli
-          sed -i 's/"@bed-vibe\/shared": "workspace:\*"/"@bed-vibe\/shared": "'$VERSION'"/' package.json
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
