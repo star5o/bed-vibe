@@ -1,0 +1,27 @@
+{
+  "name": "@bed-vibe/cli",
+  "version": "0.3.0",
+  "type": "module",
+  "bin": {
+    "bv": "./bin/bv.js",
+    "bed-vibe": "./bin/bv.js"
+  },
+  "scripts": {
+    "dev": "tsx --watch src/index.ts",
+    "build": "tsup src/index.ts src/daemon/index.ts --format esm --dts --outDir dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^2.1.143",
+    "@bed-vibe/shared": "workspace:*",
+    "chalk": "^5.6.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.0",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

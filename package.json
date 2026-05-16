@@ -1,0 +1,20 @@
+{
+  "name": "bed-vibe",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev:server": "pnpm --filter @bed-vibe/server dev",
+    "dev:web": "pnpm --filter @bed-vibe/web dev",
+    "dev:cli": "pnpm --filter @bed-vibe/cli dev",
+    "build": "pnpm -r build",
+    "build:server": "pnpm --filter @bed-vibe/server build",
+    "build:web": "pnpm --filter @bed-vibe/web build",
+    "build:cli": "pnpm --filter @bed-vibe/cli build"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

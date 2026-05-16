@@ -1,0 +1,18 @@
+{
+  "name": "@bed-vibe/server",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "start": "bun src/index.ts"
+  },
+  "dependencies": {
+    "@bed-vibe/shared": "workspace:*",
+    "hono": "^4.7.0",
+    "jose": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.0"
+  }
+}

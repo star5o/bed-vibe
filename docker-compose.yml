@@ -1,0 +1,10 @@
+services:
+  bed-vibe:
+    build: .
+    ports:
+      - "31001:3000"
+    volumes:
+      - ./data:/data
+    environment:
+      - RV_DATA_DIR=/data
+    restart: unless-stopped
