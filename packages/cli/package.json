@@ -1,11 +1,24 @@
 {
   "name": "@bed-vibe/cli",
   "version": "0.3.0",
+  "description": "CLI daemon for Bed-Vibe — remote control AI coding agents from your phone",
   "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/star5o/bed-vibe.git",
+    "directory": "packages/cli"
+  },
+  "keywords": ["claude-code", "remote-control", "cli", "daemon", "ai-coding"],
   "bin": {
     "bv": "./bin/bv.js",
     "bed-vibe": "./bin/bv.js"
   },
+  "files": [
+    "bin",
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "dev": "tsx --watch src/index.ts",
     "build": "tsup src/index.ts src/daemon/index.ts --format esm --dts --outDir dist",
