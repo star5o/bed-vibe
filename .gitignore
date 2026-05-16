@@ -33,3 +33,6 @@ coverage/
 # Temp
 .tmp/
 tmp/
+
+# Internal docs
+feature-analysis.md
