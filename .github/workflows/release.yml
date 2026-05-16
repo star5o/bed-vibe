@@ -21,7 +21,7 @@ jobs:
         id: ver
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "version=$(date -u +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+            echo "version=0.0.0-$(date -u +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
           else
             echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
           fi
