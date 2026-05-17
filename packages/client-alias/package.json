@@ -9,10 +9,6 @@
     "directory": "packages/client-alias"
   },
   "dependencies": {
-    "bed-vibe": "*"
-  },
-  "bin": {
-    "bv": "./node_modules/bed-vibe/bin/bv.js",
-    "bed-vibe": "./node_modules/bed-vibe/bin/bv.js"
+    "bed-vibe": "workspace:*"
   }
 }
