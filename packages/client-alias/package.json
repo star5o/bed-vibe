@@ -1,0 +1,18 @@
+{
+  "name": "@bed-vibe/client",
+  "version": "0.3.0",
+  "description": "Alias for bed-vibe — install via 'npm install -g bed-vibe' or 'npm install -g @bed-vibe/client'",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/star5o/bed-vibe.git",
+    "directory": "packages/client-alias"
+  },
+  "dependencies": {
+    "bed-vibe": "*"
+  },
+  "bin": {
+    "bv": "./node_modules/bed-vibe/bin/bv.js",
+    "bed-vibe": "./node_modules/bed-vibe/bin/bv.js"
+  }
+}

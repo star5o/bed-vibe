@@ -1,5 +1,5 @@
 {
-  "name": "@bed-vibe/cli",
+  "name": "bed-vibe",
   "version": "0.3.0",
   "description": "CLI daemon for Bed-Vibe — remote control AI coding agents from your phone",
   "type": "module",

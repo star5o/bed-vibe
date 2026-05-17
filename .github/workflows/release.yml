@@ -32,7 +32,7 @@ jobs:
         run: pnpm --filter @bed-vibe/shared build
 
       - name: Build CLI
-        run: pnpm --filter @bed-vibe/cli build
+        run: pnpm --filter bed-vibe build
 
       - name: Set version
         run: |
@@ -45,8 +45,16 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish CLI
+      - name: Publish CLI (bed-vibe)
         run: cd packages/cli && npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish alias (@bed-vibe/client)
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          node -e "const f='packages/client-alias/package.json';const p=JSON.parse(require('fs').readFileSync(f));p.version='$VERSION';p.dependencies['bed-vibe']='$VERSION';require('fs').writeFileSync(f,JSON.stringify(p,null,2)+'\n')"
+          cd packages/client-alias && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
