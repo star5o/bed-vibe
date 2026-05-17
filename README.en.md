@@ -1,5 +1,7 @@
 # Bed-Vibe
 
+> **This project is under active development. Official release planned for May 20.**
+
 [中文](./README.md)
 
 Remote control for AI coding agents (Claude Code, Codex, Gemini CLI, OpenCode) from your phone.

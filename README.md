@@ -1,5 +1,7 @@
 # Bed-Vibe
 
+> **此项目正在开发调试中，预计 5 月 20 日发布正式版。**
+
 [English](./README.en.md)
 
 用手机远程控制 AI 编程助手（Claude Code、Codex、Gemini CLI、OpenCode）。
